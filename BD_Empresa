@@ -1,0 +1,79 @@
+1 - A
+
+alter table codPostal
+change codPostal id_codPostal int primary key not null AUTO_INCREMENT;
+
+alter table departamento
+change id_dpt id_dpt int primary key not null AUTO_INCREMENT;
+
+alter table funcao
+change id_funcao id_funcao int primary key not null AUTO_INCREMENT;
+
+alter table funcionario
+change id_funcionario id_funcionario int primary key not null AUTO_INCREMENT;
+
+1 - B
+
+alter table funcionario
+change codPostal id_codPostal int;
+
+alter table funcionario
+add constraint fk_id_codPostal foreign key (id_codPostal) references codpostal(id_codPostal);
+
+alter table funcionario
+add constraint fk_id_dpt foreign key (id_dpt)  REFERENCES departamento(id_dpt);
+
+alter table funcionario
+add constraint fk_id_funcao foreign key (id_funcao) REFERENCES funcao(id_funcao);
+
+1 - C
+
+alter table funcionario
+add COLUMN ativo boolean;
+
+------------------------------------------------------------------------------------------------
+
+2 --
+
+show keys from codpostal;
+
+show keys from departamento;
+
+show keys from funcao;
+
+show keys from funcionario;
+
+-------------------------------------------------------------------------------------------------
+
+3 -- 
+
+insert into funcionario (id_funcionario, id_dpt, id_funcao, nome, morada, telefone, email, id_codPostal, ativo) values
+(5, 3, 4, "Duduleka", "Rua da Terra", "912345674", "dudaleka@mail", null, 1);
+
+-------------------------------------------------------------------------------------------------
+
+4 --
+
+UPDATE funcionario
+SET id_funcionario = 6
+WHERE id_funcionario = 4;
+
+UPDATE funcionario
+SET id_funcionario = 4
+WHERE id_funcionario = 5;
+
+--------------------------------------------------------------------------------------------------
+
+5 -- 
+
+UPDATE funcionario
+SET ativo = true;
+
+--------------------------------------------------------------------------------------------------
+
+6 -- 
+
+DELETE FROM funcionario
+WHERE id_funcionario = 4;
+
+--------------------------------------------------------------------------------------------------
